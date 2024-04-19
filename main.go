@@ -1,21 +1,9 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"net/http"
-)
+import "github.com/MustaphaSakka/traney/app"
 
 func main() {
 
-	//define routes
-	http.HandleFunc("/start", start)
+	app.Start()
 
-	//starting server
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
-
-}
-
-func start(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Let's start and enjoy this GO project!")
 }
