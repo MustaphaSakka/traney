@@ -9,7 +9,7 @@ services:
       - ./initdb:/docker-entrypoint-initdb.d  
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ROOT_PASSWORD: MYSQL_ALLOW_EMPTY_PASSWORD=yes
       TZ: Europe/Paris
 
 volumes:
