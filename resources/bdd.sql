@@ -14,5 +14,5 @@ CREATE TABLE `clients` (
 INSERT INTO `clients` VALUES
 	(1,'Mustapha','1990-01-02','Lyon','69003',1),
 	(2,'Pierre','1998-11-21','Villeurbane','69100',1),
-    (3,'Isabelle','1987-01-14','Paris','92000',0),
+  (3,'Isabelle','1987-01-14','Paris','92000',0),
 	(4,'Samuel','1985-04-20','Nice','06000',1);

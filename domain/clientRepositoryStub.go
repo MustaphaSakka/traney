@@ -1,6 +1,6 @@
 package domain
 
-//Stub Adapter
+//Stub Mock Adapter
 type ClientRepositoryStub struct {
 	clients []Client
 }
