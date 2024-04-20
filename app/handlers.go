@@ -2,8 +2,9 @@ package app
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
+
+	"github.com/MustaphaSakka/traney/service"
 )
 
 // DTO
@@ -12,17 +13,12 @@ type Client struct {
 	City string `json:"city"`
 }
 
-func start(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Let's start and enjoy this GO project!")
+type ClientHandlers struct {
+	service service.ClientService
 }
 
-func getAllClients(w http.ResponseWriter, r *http.Request) {
-	clients := []Client{
-		{"Pierre", "Lyon"},
-		{"Samuel", "Paris"},
-		{"Isabelle", "Nice"},
-	}
-
+func (ch *ClientHandlers) getAllClients(w http.ResponseWriter, r *http.Request) {
+	clients, _ := ch.service.GetAllClient()
 	w.Header().Add("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(clients)
 }
