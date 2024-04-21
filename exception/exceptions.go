@@ -20,3 +20,11 @@ func InternalServerException(message string) *AppException {
 		Code:    http.StatusInternalServerError,
 	}
 }
+
+//Send only the exception message
+//Code is already coming in the HTTP response
+func (e AppException) AsMessage() *AppException {
+	return &AppException{
+		Message: e.Message,
+	}
+}

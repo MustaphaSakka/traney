@@ -10,12 +10,6 @@ import (
 	"github.com/MustaphaSakka/traney/service"
 )
 
-// DTO
-type Client struct {
-	Name string `json:"full_name"`
-	City string `json:"city"`
-}
-
 type ClientHandlers struct {
 	service service.ClientService
 }
@@ -33,10 +27,16 @@ func (ch *ClientHandlers) getClient(w http.ResponseWriter, r *http.Request) {
 	client, err := ch.service.GetClient(id)
 	fmt.Print(err)
 	if err != nil {
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, err.Message)
+		writeResponse(w, err.Code, err.AsMessage())
 	} else {
-		w.Header().Add("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(client)
+		writeResponse(w, http.StatusOK, client)
+	}
+}
+
+func writeResponse(w http.ResponseWriter, code int, data interface{}) {
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(code)
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
 	}
 }

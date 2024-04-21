@@ -2,11 +2,10 @@ package domain
 
 import (
 	"database/sql"
-	"fmt"
-	"log"
 	"time"
 
 	"github.com/MustaphaSakka/traney/exception"
+	"github.com/MustaphaSakka/traney/logger"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -24,7 +23,7 @@ func (d ClientRepositoryDb) FindAll() ([]Client, error) {
 
 	err = d.client.Select(&clients, findAllSql)
 	if err != nil {
-		//log.Println("Exception while querying `clients` table " + err.Message)
+		logger.Error("Exception while querying `clients` table " + err.Error())
 		return nil, err
 	}
 
@@ -41,7 +40,7 @@ func (d ClientRepositoryDb) FindById(id string) (*Client, *exception.AppExceptio
 		if err == sql.ErrNoRows {
 			return nil, exception.NotFoundException("Client not found")
 		} else {
-			log.Println("Exception while scanning client " + err.Error())
+			logger.Error("Exception while scanning client table" + err.Error())
 			return nil, exception.InternalServerException("Unexpected database error")
 		}
 	}
@@ -54,7 +53,7 @@ func NewClientRepositoryDb() ClientRepositoryDb {
 		panic(err)
 	}
 
-	fmt.Println("Connexion to database is established.")
+	logger.Info("Connexion to database is established.")
 
 	client.SetConnMaxLifetime(time.Minute * 3)
 	client.SetMaxOpenConns(10)
