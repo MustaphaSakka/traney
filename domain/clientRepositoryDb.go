@@ -28,13 +28,26 @@ func (d ClientRepositoryDb) FindAll() ([]Client, error) {
 	return clients, nil
 }
 
+func (d ClientRepositoryDb) FindById(id string) (*Client, error) {
+	clientSql := "select client_id, name, city, zipcode, date_of_birth, status from clients where client_id = ?"
+	var c Client
+
+	err := d.client.Get(&c, clientSql, id)
+
+	if err != nil {
+		log.Println("Error while scanning client " + err.Error())
+		return nil, err
+	}
+	return &c, nil
+}
+
 func NewClientRepositoryDb() ClientRepositoryDb {
 	client, err := sqlx.Open("mysql", "root:@/traney")
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("Connexion de database is established.")
+	fmt.Println("Connexion to database is established.")
 
 	client.SetConnMaxLifetime(time.Minute * 3)
 	client.SetMaxOpenConns(10)

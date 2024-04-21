@@ -12,4 +12,5 @@ type Client struct {
 // Port
 type ClientRepository interface {
 	FindAll() ([]Client, error)
+	FindById(string) (*Client, error)
 }
