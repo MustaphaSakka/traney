@@ -34,7 +34,7 @@ func (ch *ClientHandlers) getClient(w http.ResponseWriter, r *http.Request) {
 	fmt.Print(err)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, err.Error())
+		fmt.Fprintf(w, err.Message)
 	} else {
 		w.Header().Add("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(client)

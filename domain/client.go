@@ -1,5 +1,7 @@
 package domain
 
+import "github.com/MustaphaSakka/traney/exception"
+
 type Client struct {
 	Id          string `db:"client_id"`
 	Name        string
@@ -12,5 +14,5 @@ type Client struct {
 // Port
 type ClientRepository interface {
 	FindAll() ([]Client, error)
-	FindById(string) (*Client, error)
+	FindById(string) (*Client, *exception.AppException)
 }

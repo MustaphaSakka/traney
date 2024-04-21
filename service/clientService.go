@@ -1,11 +1,14 @@
 package service
 
-import "github.com/MustaphaSakka/traney/domain"
+import (
+	"github.com/MustaphaSakka/traney/domain"
+	"github.com/MustaphaSakka/traney/exception"
+)
 
 // Port
 type ClientService interface {
 	GetAllClient() ([]domain.Client, error)
-	GetClient(string) (*domain.Client, error)
+	GetClient(string) (*domain.Client, *exception.AppException)
 }
 
 type DefaultClientService struct {
@@ -16,7 +19,7 @@ func (s DefaultClientService) GetAllClient() ([]domain.Client, error) {
 	return s.repo.FindAll()
 }
 
-func (s DefaultClientService) GetClient(id string) (*domain.Client, error) {
+func (s DefaultClientService) GetClient(id string) (*domain.Client, *exception.AppException) {
 	return s.repo.FindById(id)
 }
 
