@@ -1,42 +1,35 @@
 package domain
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 )
 
 type ClientRepositoryDb struct {
-	client *sql.DB
+	client *sqlx.DB
 }
 
 func (d ClientRepositoryDb) FindAll() ([]Client, error) {
+	clients := make([]Client, 0)
+	var err error
+
 	findAllSql := "select * from clients"
 
-	rows, err := d.client.Query(findAllSql)
+	err = d.client.Select(&clients, findAllSql)
 	if err != nil {
 		log.Println("Error while querying `clients` table " + err.Error())
 		return nil, err
 	}
 
-	clients := make([]Client, 0)
-	for rows.Next() {
-		var c Client
-		err := rows.Scan(&c.Id, &c.Name, &c.City, &c.Zipcode, &c.DateofBirth, &c.Status)
-		if err != nil {
-			log.Println("Error while scanning `clients` table " + err.Error())
-			return nil, err
-		}
-		clients = append(clients, c)
-	}
 	return clients, nil
 }
 
 func NewClientRepositoryDb() ClientRepositoryDb {
-	client, err := sql.Open("mysql", "root:@/traney")
+	client, err := sqlx.Open("mysql", "root:@/traney")
 	if err != nil {
 		panic(err)
 	}
