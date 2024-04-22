@@ -21,6 +21,13 @@ func InternalServerException(message string) *AppException {
 	}
 }
 
+func ValidationError(message string) *AppException {
+	return &AppException{
+		Message: message,
+		Code:    http.StatusUnprocessableEntity,
+	}
+}
+
 //Send only the exception message
 //Code is already coming in the HTTP response
 func (e AppException) AsMessage() *AppException {

@@ -2,7 +2,6 @@ package domain
 
 import (
 	"database/sql"
-	"time"
 
 	"github.com/MustaphaSakka/traney/exception"
 	"github.com/MustaphaSakka/traney/logger"
@@ -47,16 +46,6 @@ func (d ClientRepositoryDb) FindById(id string) (*Client, *exception.AppExceptio
 	return &c, nil
 }
 
-func NewClientRepositoryDb() ClientRepositoryDb {
-	client, err := sqlx.Open("mysql", "root:@/traney")
-	if err != nil {
-		panic(err)
-	}
-
-	logger.Info("Connexion to database is established.")
-
-	client.SetConnMaxLifetime(time.Minute * 3)
-	client.SetMaxOpenConns(10)
-	client.SetMaxIdleConns(10)
-	return ClientRepositoryDb{client}
+func NewClientRepositoryDb(dbClient *sqlx.DB) ClientRepositoryDb {
+	return ClientRepositoryDb{dbClient}
 }
