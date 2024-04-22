@@ -7,8 +7,10 @@ import (
 )
 
 // Port
+//
+//go:generate mockgen -destination=../mocks/service/mockClientService.go -package=service github.com/MustaphaSakka/traney/service ClientService
 type ClientService interface {
-	GetAllClient() ([]dto.ClientResponse, error)
+	GetAllClient() ([]dto.ClientResponse, *exception.AppException)
 	GetClient(string) (*dto.ClientResponse, *exception.AppException)
 }
 
@@ -16,7 +18,7 @@ type DefaultClientService struct {
 	repo domain.ClientRepository
 }
 
-func (s DefaultClientService) GetAllClient() ([]dto.ClientResponse, error) {
+func (s DefaultClientService) GetAllClient() ([]dto.ClientResponse, *exception.AppException) {
 	clients, err := s.repo.FindAll()
 	if err != nil {
 		return nil, err
@@ -25,8 +27,8 @@ func (s DefaultClientService) GetAllClient() ([]dto.ClientResponse, error) {
 	for _, c := range clients {
 		response = append(response, c.ToDto())
 	}
-	return response, err
 
+	return response, err
 }
 
 func (s DefaultClientService) GetClient(id string) (*dto.ClientResponse, *exception.AppException) {

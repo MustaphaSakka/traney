@@ -14,7 +14,7 @@ type ClientRepositoryDb struct {
 	client *sqlx.DB
 }
 
-func (d ClientRepositoryDb) FindAll() ([]Client, error) {
+func (d ClientRepositoryDb) FindAll() ([]Client, *exception.AppException) {
 	clients := make([]Client, 0)
 	var err error
 
@@ -23,7 +23,7 @@ func (d ClientRepositoryDb) FindAll() ([]Client, error) {
 	err = d.client.Select(&clients, findAllSql)
 	if err != nil {
 		logger.Error("Exception while querying `clients` table " + err.Error())
-		return nil, err
+		return nil, exception.InternalServerException("Exception while querying database")
 	}
 
 	return clients, nil

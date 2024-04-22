@@ -35,6 +35,6 @@ func (c Client) ToDto() dto.ClientResponse {
 
 // Port
 type ClientRepository interface {
-	FindAll() ([]Client, error)
+	FindAll() ([]Client, *exception.AppException)
 	FindById(string) (*Client, *exception.AppException)
 }
