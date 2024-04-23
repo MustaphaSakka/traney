@@ -23,9 +23,12 @@ func Start() {
 	ah := AccountHandler{service.NewAccountService(accountRepositoryDb)}
 
 	// define routes
-	router.HandleFunc("/clients", ch.getAllClients).Methods(http.MethodGet)
-	router.HandleFunc("/clients/{client_id:[0-9]+}", ch.getClient).Methods(http.MethodGet)
-	router.HandleFunc("/clients/{client_id:[0-9]+}/account", ah.NewAccount).Methods(http.MethodPost)
+	router.HandleFunc("/clients", ch.getAllClients).Methods(http.MethodGet).Name("GetAllClients")
+	router.HandleFunc("/clients/{client_id:[0-9]+}", ch.getClient).Methods(http.MethodGet).Name("GetClient")
+	router.HandleFunc("/clients/{client_id:[0-9]+}/account", ah.NewAccount).Methods(http.MethodPost).Name("NewAccount")
+
+	am := AuthMiddleware{domain.NewAuthRepository()}
+	router.Use(am.authorizationHandler())
 
 	// starting server
 	log.Fatal(http.ListenAndServe("localhost:8000", router))

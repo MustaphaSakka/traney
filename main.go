@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	logger.Info("Application is started!")
+	logger.Info("TRANEY is started!")
 	app.Start()
 
 }
