@@ -5,6 +5,8 @@ import (
 	"github.com/MustaphaSakka/traney/exception"
 )
 
+const dbTSLayout = "2006-01-02 03:04:05"
+
 type Account struct {
 	AccountId   string
 	ClientId    string
@@ -19,6 +21,17 @@ type AccountRepository interface {
 	Save(Account) (*Account, *exception.AppException)
 }
 
-func (a Account) ToAccountResponseDto() dto.AccountResponse {
-	return dto.AccountResponse{AccountId: a.AccountId}
+//go:generate mockgen -destination=../mocks/domain/mockAccountRepository.go -package=domain github.com/MustaphaSakka/traney/domain AccountRepository
+func (a Account) ToAccountResponseDto() *dto.AccountResponse {
+	return &dto.AccountResponse{AccountId: a.AccountId}
+}
+
+func NewAccount(clientId, accountType string, amount float64) Account {
+	return Account{
+		ClientId:    clientId,
+		OpeningDate: dbTSLayout,
+		AccountType: accountType,
+		Amount:      amount,
+		Status:      "1",
+	}
 }
