@@ -1,8 +1,8 @@
 package domain
 
 import (
+	"github.com/MustaphaSakka/traney-lib/exception"
 	"github.com/MustaphaSakka/traney/dto"
-	"github.com/MustaphaSakka/traney/exception"
 )
 
 type Client struct {

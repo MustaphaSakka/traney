@@ -3,9 +3,9 @@ package service
 import (
 	"testing"
 
+	"github.com/MustaphaSakka/traney-lib/exception"
 	realdomain "github.com/MustaphaSakka/traney/domain"
 	"github.com/MustaphaSakka/traney/dto"
-	"github.com/MustaphaSakka/traney/exception"
 	"github.com/MustaphaSakka/traney/mocks/domain"
 	"go.uber.org/mock/gomock"
 )

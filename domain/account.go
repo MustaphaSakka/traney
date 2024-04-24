@@ -1,8 +1,8 @@
 package domain
 
 import (
+	"github.com/MustaphaSakka/traney-lib/exception"
 	"github.com/MustaphaSakka/traney/dto"
-	"github.com/MustaphaSakka/traney/exception"
 )
 
 const dbTSLayout = "2006-01-02 03:04:05"

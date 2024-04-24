@@ -3,8 +3,8 @@ package domain
 import (
 	"strconv"
 
-	"github.com/MustaphaSakka/traney/exception"
-	"github.com/MustaphaSakka/traney/logger"
+	"github.com/MustaphaSakka/traney-lib/exception"
+	"github.com/MustaphaSakka/traney-lib/logger"
 	"github.com/jmoiron/sqlx"
 )
 

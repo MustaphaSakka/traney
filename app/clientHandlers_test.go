@@ -5,8 +5,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/MustaphaSakka/traney-lib/exception"
 	"github.com/MustaphaSakka/traney/dto"
-	"github.com/MustaphaSakka/traney/exception"
 	"github.com/MustaphaSakka/traney/mocks/service"
 	"github.com/gorilla/mux"
 	"go.uber.org/mock/gomock"

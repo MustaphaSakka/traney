@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/MustaphaSakka/traney/logger"
+	"github.com/MustaphaSakka/traney-lib/logger"
 )
 
 type AuthRepository interface {

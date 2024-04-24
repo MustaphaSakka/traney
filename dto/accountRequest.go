@@ -3,7 +3,7 @@ package dto
 import (
 	"strings"
 
-	"github.com/MustaphaSakka/traney/exception"
+	"github.com/MustaphaSakka/traney-lib/exception"
 )
 
 type AccountRequest struct {

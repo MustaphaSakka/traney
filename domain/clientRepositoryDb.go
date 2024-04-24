@@ -3,8 +3,8 @@ package domain
 import (
 	"database/sql"
 
-	"github.com/MustaphaSakka/traney/exception"
-	"github.com/MustaphaSakka/traney/logger"
+	"github.com/MustaphaSakka/traney-lib/exception"
+	"github.com/MustaphaSakka/traney-lib/logger"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/MustaphaSakka/traney-lib/logger"
 	"github.com/MustaphaSakka/traney/domain"
-	"github.com/MustaphaSakka/traney/logger"
 	"github.com/MustaphaSakka/traney/service"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
